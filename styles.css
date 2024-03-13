@@ -1,6 +1,93 @@
 body {
     background-color: #f4f4f4;
     font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+.container{
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+.main-form{
+    width: 90%;
+    max-width: 400px;
+    background-color: white;
+    position: absolute;
+    /* margin: 50px auto;
+    border-radius: 8px;
+    display: flex; */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 50px 60px 70px;
+    text-align: center;
+}
+
+.main-form h1{
+    font-size: 30px;
+    margin-bottom: 40px;
+    color: #3c00a0;
+    position: relative;
+}
+
+.main-form .input-field{
+    background: #eaeaea;
+    margin: 15px 0;
+    display: flex;
+    border-radius: 3px;
+    align-items: center;
+    border: 1px solid #3c00a0;
+}
+
+input{
+    width: 100%;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    padding: 18px 15px;
+}
+
+ form p{
+    text-align: left;
+    font-size: 13px;
+ }
+
+ form p a{
+    text-decoration: none;
+    color: #3c00a0;
+ }
+
+ .buttons{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+ }
+
+ .buttons button{
+    flex-basis: 48%;
+    background: #3c00a0;
+    color: #fff;
+    height: 40px;
+    border-radius: 20px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    transition: background 1s;
+ }
+
+ .input-group{
+    height: 220px;
+ }
+
+ .buttons button.disable{
+    background: #eaeaea;
+    color: #555;
+ }
+/* button{
+    margin: 20px;
 }
 
 .SignInform{
@@ -12,7 +99,6 @@ body {
 }
 
 .SignInform, .SignUpform {
-    /* max-width: 300px; */
     margin: 50px auto;
     background-color: white;
     padding: 20px;
@@ -50,5 +136,5 @@ input {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-}
+} */
 

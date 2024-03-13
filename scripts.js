@@ -1,7 +1,7 @@
 $(document).ready(function() {
     // Function to validate password
     function validatePassword(password) {
-        var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+        var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&.])[A-Za-z\d@$!%*#?&.]{8,}$/;
         var isValid = regex.test(password);
         console.log("Password validation result:", isValid); // Debugging line
         return isValid;
