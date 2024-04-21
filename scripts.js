@@ -1,100 +1,106 @@
-$(document).ready(function() {
-    // Function to validate password
-    function validatePassword(password) {
-        var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&.])[A-Za-z\d@$!%*#?&.]{8,}$/;
-        return regex.test(password);
+$(document).ready(function () {
+  // Login form validation
+  $(".login-form form").on("submit", function (event) {
+    event.preventDefault();
+
+    var username = $(this).find('input[name="username"]').val();
+    var password = $(this).find('input[name="password"]').val();
+
+    if (!username || !password) {
+      alert("Username and password must not be empty");
+      return;
     }
 
-    // Function to validate phone number
-    function validatePhoneNumber(phoneNumber) {
-        var regex = /^\d{11}$/; // Assumes phone number should be exactly 11 digits
-        return regex.test(phoneNumber);
+    if (
+      !/\d/.test(password) ||
+      !/[!@#$%^&*]/.test(password) ||
+      password.length < 8
+    ) {
+      alert(
+        "Password length should be 8 characters long and it must contain at least one number and one special character"
+      );
+      return;
     }
 
-    // Function to validate email
-    function validateEmail(email) {
-        var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return regex.test(email);
+    //   alert("Username: " + username + "\nPassword: " + password);
+    alert("login successful");
+  });
+
+  // Signup form validation
+  $(".signup-form form").on("submit", function (event) {
+    event.preventDefault();
+
+    var username = $(this).find('input[name="username"]').val();
+    var email = $(this).find('input[name="email"]').val();
+    var password = $(this).find('input[name="password"]').val();
+    var confirmPass = $(this).find('input[name="confirmPass"]').val();
+    var phone = $(this).find('input[name="phone"]').val();
+    var address = $(this).find('input[name="address"]').val();
+    var city = $(this).find('input[name="city"]').val();
+    var country = $(this).find('input[name="country"]').val();
+    var age = $(this).find('input[name="age"]').val();
+
+
+    if (
+      !username ||
+      !email ||
+      !password ||
+      !confirmPass ||
+      !phone ||
+      !address ||
+      !city ||
+      !country ||
+      !age
+    ) {
+      alert("All fields must not be empty");
+      return;
     }
 
-    // Function to validate selected country
-    function validateCountry(country) {
-        var countriesList = ["Pakistan", "India", "USA"]; // Example list of countries
-        return countriesList.includes(country);
+    if (
+      !/\d/.test(password) ||
+      !/[!@#$%^&*]/.test(password) ||
+      password.length < 8
+    ) {
+      alert(
+        "Password length should be 8 characters long and it must contain at least one number and one special character"
+      );
+      return;
     }
 
-    // Function to validate selected city based on the country
-    function validateCity(country, city) {
-        // Define a map of cities for each country
-        var citiesMap = {
-            "Pakistan": ["Chiniot", "Faisalabad", "Lahore"],
-            "India": ["Mumbai", "Delhi", ""],
-            "USA": ["California", "Newyork", "San Fransisco"]
-        };
-        return citiesMap[country].includes(city);
+    if (password !== confirmPass) {
+        alert("passwords do not match");
+        return;  
     }
 
-    $('.form-container form').submit(function(event) {
-        event.preventDefault(); // Prevent form submission
-        
-        var password = $(this).find('input[name="password"]').val();
-        var confirmPassword = $(this).find('input[name="confirmPass"]').val();
-        var phoneNumber = $(this).find('input[name="phone"]').val();
-        var email = $(this).find('input[name="email"]').val();
-        var country = $(this).find('select[name="country"]').val();
-        var city = $(this).find('select[name="city"]').val();
-        console.log(phoneNumber)
-        
-        if (!validatePassword(password)) {
-            alert('Password must be at least 8 characters long and contain at least one letter, one number, and one special character.');
-            return;
-        }
+    if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email)) {
+      alert("Email must be in a valid format");
+      return;
+    }
 
-        
-        if (password !== confirmPassword) {
-            alert('Passwords do not match.');
-            return;
-        }
+    if (parseInt(age) <= 15) {
+        alert("Age must be above 15");
+        return;
+      }
 
-        
-        if (!validatePhoneNumber(phoneNumber)) {
-            alert('Invalid phone number.');
-            return;
-        }
+    if (phone.length !== 11) {
+        alert("Phone number must be 11 digits long");
+        return;
+    }
 
-        
-        if (!validateEmail(email)) {
-            alert('Invalid email address.');
-            return;
-        }
+    alert("signup successful");
+    $(".login-form").show();
+    $(".signup-form").hide();
+  });
 
-        
-        if (!validateCountry(country)) {
-            alert('Please select a valid country.');
-            return;
-        }
+  // Show signup form and hide login form when signup button is clicked
+  $("#signup-link").on("click", function () {
+    $(".signup-form").show();
+    $(".login-form").hide();
+  });
 
-
-        if (!validateCity(country, city)) {
-            alert('Please select a valid city for the selected country.');
-            return;
-        }
-
-        alert('Signup form submitted successfully.');
-
-    });
-
-
-    $('#signup-link').click(function () {
-        $('.signup-form').show();
-        $('.login-form').hide();
-        $('.additional-fields').css('display', 'flex');
-        $('.form-container').css('max-width', '700px');
-    });
-
-    $('#login-link').click(function() {
-        $('.login-form').show();
-        $('.signup-form').hide();
-        $('.form-container').css('max-width', '430px');
-    });
+  // Show login form and hide signup form when login button is clicked
+  $("#login-link").on("click", function () {
+    $(".login-form").show();
+    $(".signup-form").hide();
+  });
 });
